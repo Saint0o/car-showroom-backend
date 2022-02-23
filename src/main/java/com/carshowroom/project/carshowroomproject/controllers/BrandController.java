@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/brands")
+@RequestMapping("/v1/brands")
 @Api("Set of endpoints for brands")
 public class BrandController {
     BrandService brandService;

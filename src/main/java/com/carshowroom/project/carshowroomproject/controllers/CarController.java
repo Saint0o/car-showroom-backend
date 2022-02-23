@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/cars")
+@RequestMapping("/v1/cars")
 @Api("Set of endpoints for cars")
 @CrossOrigin(origins = "http://localhost:4200" , maxAge = 3600)
 public class CarController {
