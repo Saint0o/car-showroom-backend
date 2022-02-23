@@ -14,7 +14,6 @@
 	<name>car-showroom-project</name>
 	<description>Car sales project</description>
 	<properties>
-		<java.version>11</java.version>
 		<jsonwebtoken.version>0.8.0</jsonwebtoken.version>
 	</properties>
 	<dependencies>
