@@ -4,7 +4,12 @@ import com.carshowroom.project.carshowroomproject.dto.AuthenticationRequestDto;
 import com.carshowroom.project.carshowroomproject.entities.User;
 import com.carshowroom.project.carshowroomproject.security.jwt.JwtTokenProvider;
 import com.carshowroom.project.carshowroomproject.service.UserService;
+import org.apache.catalina.Context;
+import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -55,9 +60,11 @@ public class AuthenticationController {
             cookie.setSecure(true);
             cookie.setHttpOnly(true);
             cookie.setPath("/");
+//            cookie.set("SameSite=None");
 //            cookie.setDomain();
             
             response.addCookie(cookie);
+            response.addHeader("Set-Cookie", "SameSite=None; Secure");
 
             return ResponseEntity.ok().build();
         } catch (AuthenticationException e) {
