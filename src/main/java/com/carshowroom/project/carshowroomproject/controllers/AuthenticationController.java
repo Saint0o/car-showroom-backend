@@ -63,15 +63,12 @@ public class AuthenticationController {
 
             String token = jwtTokenProvider.createToken(username, user.getRoles());
             Cookie cookie = new Cookie("access_token", token);
-//            cookie.setMaxAge(15 * 60);
-//            cookie.setSecure(true);
-//            cookie.setHttpOnly(true);
 //            cookie.setPath("/");
 //            cookie.set("SameSite=None");
 //            cookie.setDomain();
 
-//            response.addCookie(cookie);
-            response.addHeader("Set-Cookie", "access_token=" + token + "; Path=/v1; Secure; SameSite=None");
+            response.addCookie(cookie);
+//            response.addHeader("Set-Cookie", "access_token=" + token + "; Path=/v1; Secure; SameSite=None");
             response.addHeader("access_token", token);
 //            response.addHeader("Set-Cookie", "SameSite=None; Secure");
 
