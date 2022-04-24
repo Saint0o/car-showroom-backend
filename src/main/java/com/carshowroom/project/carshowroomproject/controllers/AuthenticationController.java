@@ -1,6 +1,7 @@
 package com.carshowroom.project.carshowroomproject.controllers;
 
 import com.carshowroom.project.carshowroomproject.dto.AuthenticationRequestDto;
+import com.carshowroom.project.carshowroomproject.dto.UserInfoDto;
 import com.carshowroom.project.carshowroomproject.entities.Car;
 import com.carshowroom.project.carshowroomproject.entities.User;
 import com.carshowroom.project.carshowroomproject.exceptions.ExceptionsControllerAdvice;
@@ -51,7 +52,7 @@ public class AuthenticationController {
                                     schema = @Schema(implementation = ExceptionsControllerAdvice.class)))
             })
     @PostMapping("/authorization")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto, HttpServletResponse response) {
+    public UserInfoDto login(@RequestBody AuthenticationRequestDto requestDto, HttpServletResponse response) {
         try {
             String username = requestDto.getLogin();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
@@ -64,18 +65,18 @@ public class AuthenticationController {
             String token = jwtTokenProvider.createToken(username, user.getRoles());
             Cookie cookie = new Cookie("access_token", token);
 //            cookie.setMaxAge(15 * 60);
-//            cookie.setSecure(true);
-//            cookie.setHttpOnly(true);
-//            cookie.setPath("/");
+            cookie.setSecure(false);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
 //            cookie.set("SameSite=None");
-//            cookie.setDomain();
+            cookie.setDomain("localhost");
 
-//            response.addCookie(cookie);
-            response.addHeader("Set-Cookie", "access_token=" + token + "; Path=/v1; Secure; SameSite=None");
-            response.addHeader("access_token", token);
+            response.addCookie(cookie);
+//            response.addHeader("Set-Cookie", "access_token=" + token + "; Path=/v1; Secure; SameSite=None");
+            response.addHeader("Token", token);
 //            response.addHeader("Set-Cookie", "SameSite=None; Secure");
 
-            return ResponseEntity.ok().build();
+            return new UserInfoDto(token);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }

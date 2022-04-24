@@ -32,6 +32,6 @@ public class CarDto {
         this.price = car.getPrice();
         this.power = car.getPower();
         this.description = car.getDescription();
-        this.brandName = car.getBrand().getTitle();
+//        this.brandName = car.getBrand().getTitle();
     }
 }
