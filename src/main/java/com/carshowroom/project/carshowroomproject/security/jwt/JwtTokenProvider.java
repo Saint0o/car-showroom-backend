@@ -71,7 +71,7 @@ public class JwtTokenProvider {
 
         if (accessToken == null) accessToken = req.getHeader("Authorization");
 
-        if (accessToken != null && accessToken.contains("bearer")) accessToken = accessToken.substring(7);
+        if (accessToken != null && accessToken.contains("Bearer")) accessToken = accessToken.substring(7);
 
         return accessToken;
     }

@@ -7,7 +7,9 @@ values
 CREATE TABLE cars (id bigserial primary key, model varchar(255), power int, price int, description varchar(255), brand_id bigint references brands (id));
 insert into cars (model, power, price, brand_id)
 values ('m3', 500, 10000000, 1),
-       ('m2 competition', 1000, 100000000, 1);
+       ('m2 competition', 1000, 100000000, 1),
+       ('a3', 1000, 100000000, 2),
+       ('a4', 1000, 100000000, 2);
 
 -- CREATE TABLE car_options (id bigserial primary key, car_id bigint references cars (id), option_name varchar (255));
 -- insert into car_options (car_id, option_name)

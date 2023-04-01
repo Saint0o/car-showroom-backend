@@ -5,6 +5,7 @@ import com.carshowroom.project.carshowroomproject.repositories.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,9 @@ public class BrandService {
 
     public Optional<Brand> getByTitle(String title) {
         return brandRepository.findBrandByTitle(title);
+    }
+
+    public List<Brand> getBrands() {
+        return brandRepository.findAll();
     }
 }

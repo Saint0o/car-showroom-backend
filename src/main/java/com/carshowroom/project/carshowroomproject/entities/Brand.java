@@ -18,7 +18,4 @@ public class Brand {
 
     @Column(name = "title")
     private String title;
-
-    @OneToMany(mappedBy = "brand")
-    private List<Car> cars;
 }

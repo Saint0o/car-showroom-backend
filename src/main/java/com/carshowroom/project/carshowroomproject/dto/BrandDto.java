@@ -23,6 +23,5 @@ public class BrandDto {
     public BrandDto (Brand brand) {
         this.id = brand.getId();
         this.title = brand.getTitle();
-        this.carsList = brand.getCars().stream().map(CarDto::new).collect(Collectors.toList());
     }
 }

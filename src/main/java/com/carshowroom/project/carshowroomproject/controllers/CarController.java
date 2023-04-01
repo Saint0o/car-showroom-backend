@@ -34,18 +34,23 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping
-    @Operation(summary = "Returns all cars",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Success",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = CarDto.class))),
-                    @ApiResponse(responseCode = "403", description = "Authorization failed",
-                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = ExceptionsControllerAdvice.class)))
-            })
-    public List<CarDto> getAllCars() {
-        return carService.getAllCars().stream().map(CarDto::new).collect(Collectors.toList());
+    @GetMapping()
+    public List<CarDto> getCarsByBrandId(@RequestParam Integer brandId) {
+        return carService.getCarsByBrandId(brandId).stream().map(CarDto::new).collect(Collectors.toList());
     }
+
+//    @GetMapping
+//    @Operation(summary = "Returns all cars",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Success",
+//                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = CarDto.class))),
+//                    @ApiResponse(responseCode = "403", description = "Authorization failed",
+//                            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+//                                    schema = @Schema(implementation = ExceptionsControllerAdvice.class)))
+//            })
+//    public List<CarDto> getAllCars() {
+//        return carService.getAllCars().stream().map(CarDto::new).collect(Collectors.toList());
+//    }
 
     @GetMapping("/{id}")
     @Operation(summary = "Returns a specific car by their identifier. 404 if does not exist.",

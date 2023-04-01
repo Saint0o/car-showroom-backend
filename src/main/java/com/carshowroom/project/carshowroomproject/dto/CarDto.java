@@ -23,8 +23,8 @@ public class CarDto {
     @ApiModelProperty(notes = "Description of the car.", example = "example", required = false, position = 4)
     private String description;
 
-    @ApiModelProperty(notes = "Brand of the car.", example = "example", required = true, position = 5)
-    private String brandName;
+    @ApiModelProperty(notes = "Brand id of the car.", example = "1", required = true, position = 5)
+    private Integer brandId;
 
     public CarDto(Car car) {
         this.id = car.getId();
@@ -32,6 +32,6 @@ public class CarDto {
         this.price = car.getPrice();
         this.power = car.getPower();
         this.description = car.getDescription();
-//        this.brandName = car.getBrand().getTitle();
+        this.brandId = car.getBrandId();
     }
 }

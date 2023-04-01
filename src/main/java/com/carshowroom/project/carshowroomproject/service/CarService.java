@@ -21,6 +21,10 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public List<Car> getCarsByBrandId(Integer brandId) {
+        return carRepository.findCarsByBrandId(brandId);
+    }
+
     public Optional<Car> getCarById(Long id) {
         return carRepository.findById(id);
     }

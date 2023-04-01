@@ -16,9 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/v1/brands")
 @Tag(name = "Set of endpoints for brands")
+@CrossOrigin
 @SecurityRequirement(name = "auth")
 public class BrandController {
     BrandService brandService;
@@ -51,8 +55,7 @@ public class BrandController {
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = ExceptionsControllerAdvice.class)))
             })
-    public BrandDto getAuthorByName(@RequestParam String name) {
-        Brand author = brandService.getByTitle(name).orElseThrow(() -> new ResourceNotFoundException("Unable to find brand with name: " + name));
-        return new BrandDto(author);
+    public List<BrandDto> getBrands() {
+        return brandService.getBrands().stream().map(BrandDto::new).collect(Collectors.toList());
     }
 }
